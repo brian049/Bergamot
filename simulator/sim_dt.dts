@@ -47,8 +47,8 @@
     };
 
     chosen {
-		bootargs = "earlycon console=ttyS0";
-		stdout-path = "/soc/uart0@10000000";
+		bootargs = "earlycon=sbi console=ttyS0,115200";
+		stdout-path = "/soc/uart0@10000000";    
 	};
 
     soc {

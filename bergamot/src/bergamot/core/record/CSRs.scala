@@ -572,15 +572,50 @@ class CoreRegister {
   * Include: pmpcfg0-15, pmpaddr0-63
   *
   * @note
-  *   Unsupported
+  *   Unsupported -> Implements basic PMP support for OpenSBI v1.8
   */
-class PMPRegister {
-  // PMP: Unsupported
-  private val PMP_START = 0x3a0
-  private val PMP_END = 0x3ef
-  val pmps = for (i <- 0x3a0 until PMP_END) yield {
-    i.U -> ReadAndWriteRegister(() => 0.U)
+class PMPRegister(xlen: Int = 32) {
+  // PMP: Unsupported -> Implements basic PMP support for OpenSBI v1.8
+
+  private val PMP_COUNT = 16
+  private val PMPCFG_COUNT = if (xlen == 32) 4 else 2
+
+  private val PMPCFG_START = 0x3a0
+  private val PMPADDR_START = 0x3b0
+
+  private val pmpcfgRegs = RegInit(VecInit(Seq.fill(PMPCFG_COUNT)(0.U(32.W))))
+  private val pmpaddrRegs = RegInit(VecInit(Seq.fill(PMP_COUNT)(0.U(32.W))))
+  
+  private val pmpcfgs = for (i <- 0 until PMPCFG_COUNT) yield {
+    val addr = PMPCFG_START + i
+    
+    (addr.U -> ReadAndWriteRegister(
+      () => pmpcfgRegs(i),
+      (data: UInt) => {
+        pmpcfgRegs(i) := data
+      }
+    ))
   }
+  
+  private val pmpaddrs = for (i <- 0 until PMP_COUNT) yield {
+    val addr = PMPADDR_START + i
+    
+    (addr.U -> ReadAndWriteRegister(
+      () => pmpaddrRegs(i),
+      (data: UInt) => {
+        pmpaddrRegs(i) := data
+      }
+    ))
+  }
+  
+  val pmps = pmpcfgs ++ pmpaddrs
+  
+
+  // private val PMP_START = 0x3a0
+  // private val PMP_END = 0x3ef
+  // val pmps = for (i <- 0x3a0 until PMP_END) yield {
+  //   i.U -> ReadAndWriteRegister(() => 0.U)
+  // }
 }
 
 /** Monitor registers
