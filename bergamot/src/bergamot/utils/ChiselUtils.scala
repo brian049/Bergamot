@@ -66,7 +66,7 @@ object ChiselUtils {
       * @return
       *   Zero
       */
-    def zero: T = 0.U.asTypeOf(x)
+    def zero: T = WireInit(0.U.asTypeOf(x))
 
     /** 0 as UInt
       *
