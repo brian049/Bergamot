@@ -108,6 +108,21 @@ int main(int argc, char **argv)
         VL_PRINTF(P_WARN "No device tree file specified!\n");
     }
 
+    vluint64_t trace_start = 0;
+    vluint64_t trace_end = -1; // means infinite
+
+    flag = Verilated::commandArgsPlusMatch("trace_start");
+    if (flag && strncmp(flag, "+trace_start", 12) == 0)
+    {
+        trace_start = strtoul(&flag[13], NULL, 10);
+    }
+
+    flag = Verilated::commandArgsPlusMatch("trace_end");
+    if (flag && strncmp(flag, "+trace_end", 10) == 0)
+    {
+        trace_end = strtoul(&flag[11], NULL, 10);
+    }
+
     // Create verilator top
     VVerilatorTestCore *top = new VVerilatorTestCore;
 #ifdef VM_TRACE
@@ -186,7 +201,7 @@ int main(int argc, char **argv)
         // if (top->io_debug_hit) {
 #ifdef VM_TRACE
         // Dump trace data for this cycle
-        if (tfp)
+        if (tfp && main_time >= trace_start && main_time <= trace_end)
             tfp->dump(main_time);
 #endif
         // }
