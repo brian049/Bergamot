@@ -84,8 +84,8 @@ class InstructionRetire(depth: Int) extends Module {
 
   // Retire entries
   private val retireEntries = VecInit(
-    io.robTableRetire.entries(io.retired.bits(30, 0) ## 0.U),
-    io.robTableRetire.entries(io.retired.bits(30, 0) ## 1.U)
+    io.robTableRetire.entries((io.retired.bits(30, 0) ## 0.U)(3, 0)),
+    io.robTableRetire.entries((io.retired.bits(30, 0) ## 1.U)(3, 0))
   )
 
   private val retireValid = retireEntries.map(item => item.commit || !item.valid)

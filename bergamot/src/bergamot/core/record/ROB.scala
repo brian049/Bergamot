@@ -51,19 +51,19 @@ class ROB(depth: Int) extends Module {
   // Table write logic
   when(io.robTableWrite.wen) {
     io.robTableWrite.entries.foreach { entry =>
-      table(entry.id).pc := entry.pc
-      table(entry.id).spec := entry.spec
-      table(entry.id).rd := entry.rd
-      table(entry.id).valid := entry.valid
-      table(entry.id).commit := false.B
+      table(entry.id(3, 0)).pc := entry.pc
+      table(entry.id(3, 0)).spec := entry.spec
+      table(entry.id(3, 0)).rd := entry.rd
+      table(entry.id(3, 0)).valid := entry.valid
+      table(entry.id(3, 0)).commit := false.B
     }
   }
 
   // Table commit logic
   io.robTableCommit.entries.foreach { entry =>
     when(entry.valid) {
-      table(entry.rd).executeResult := entry
-      table(entry.rd).commit := true.B
+      table(entry.rd(3, 0)).executeResult := entry
+      table(entry.rd(3, 0)).commit := true.B
     }
   }
 
