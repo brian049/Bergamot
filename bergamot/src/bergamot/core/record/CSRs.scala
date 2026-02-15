@@ -215,7 +215,7 @@ class CSRs extends Module {
   }
 
   when(io.trap.interruptTrigger) {
-    val delegation = interruptsReg.mideleg.value(pendingInterruptCode)
+    val delegation = interruptsReg.mideleg.value(pendingInterruptCode.pad(6))
     printf("Pending code = %d\n", pendingInterruptCode)
     when(!delegation) { // M-Handler
       io.trap.handlerPC := exceptionReg.interruptMLevel(io.trap.trapPC, pendingInterruptCode, io.trap.trapVal)
@@ -238,7 +238,7 @@ class CSRs extends Module {
   // Exception
   when(io.trap.exceptionTrigger) {
     // Delegation check
-    val delegation = exceptionReg.medeleg.value(io.trap.trapCode)
+    val delegation = exceptionReg.medeleg.value(io.trap.trapCode.pad(6))
 
     // Exceptions at M-Level will never be delegated to S-Level
     when(statusReg.privilege === PrivilegeType.M || !delegation) { // M-Handler

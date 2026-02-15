@@ -244,8 +244,10 @@ class StoreQueue(depth: Int) extends Module {
   io.retire.entries.foreach { entry =>
     when(entry.valid) {
       entry.id.foreach { id =>
-        queue(id).retire := true.B
-        queue(id).valid := true.B // Recovery bypass
+        // queue(id).retire := true.B
+        // queue(id).valid := true.B // Recovery bypass
+        queue(id(2, 0)).retire := true.B
+        queue(id(2, 0)).valid := true.B
       }
     }
   }
