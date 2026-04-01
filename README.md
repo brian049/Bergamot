@@ -6,7 +6,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/LoveLonelyTime/Bergamot)
 ![GitHub Repo stars](https://img.shields.io/github/stars/LoveLonelyTime/Bergamot)
 
-
 ![Bergamot](doc/bergamot-social-card.png)
 
 An exquisite superscalar RV32GC processor.
@@ -28,6 +27,16 @@ And is trying to maintain simplicity as much as possible.
 **My documents site is deployed now!**
 
 Interesting? Check out our [Trip](https://lovelonelytime.github.io/Bergamot-doc/)!
+
+## Installation
+
+- Install `Mill` from [here](https://mill-build.org/mill/cli/installation-ide.html)
+- (Optional) Install `Verilator` and `GTKVawe`: `sudo apt install -y verilator gtkwave`
+
+## Usage
+
+- Generate synthesizable verilog: `make verilog`
+- Generate simulation model: `make verilogsim`
 
 ## Architecture
 
