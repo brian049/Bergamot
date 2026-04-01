@@ -1,0 +1,25 @@
+import mill._
+import mill.scalalib.scalafmt.ScalafmtModule
+import mill.scalalib.TestModule.ScalaTest
+import mill.scalalib._
+
+object bergamot extends ScalaModule with ScalafmtModule {
+  override def scalaVersion        = "2.13.16"
+  override def scalacOptions       = Seq(
+    "-language:reflectiveCalls",
+    "-deprecation",
+    "-feature",
+    "-Xcheckinit"
+  )
+  override def ivyDeps             = Agg(
+    ivy"org.chipsalliance::chisel:7.10.0"
+  )
+  override def scalacPluginIvyDeps = Agg(
+    ivy"org.chipsalliance:::chisel-plugin:7.10.0"
+  )
+  object test extends ScalaTests with TestModule.ScalaTest with ScalafmtModule {
+    override def ivyDeps = bergamot.ivyDeps() ++ Agg(
+      ivy"org.scalatest::scalatest::3.2.19"
+    )
+  }
+}
