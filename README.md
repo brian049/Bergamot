@@ -29,14 +29,12 @@ And is trying to maintain simplicity as much as possible.
 Interesting? Check out our [Trip](https://lovelonelytime.github.io/Bergamot-doc/)!
 
 ## Installation
-
-- Install `Mill` from [here](https://mill-build.org/mill/cli/installation-ide.html)
-- (Optional) Install `Verilator` and `GTKVawe`: `sudo apt install -y verilator gtkwave`
+- **💡 Recommendation:** For the easiest setup, use our provided Dev Docker container (.devcontainer). If you prefer a local installation, please refer to the [Chisel Installation Guide](https://www.chisel-lang.org/docs/installation).
 
 ## Usage
 
-- Generate synthesizable verilog: `make verilog`
-- Generate simulation model: `make verilogsim`
+- Generate synthesizable verilog: `make verilog`.
+- Generate simulation model: `make verilogsim`.
 
 ## Architecture
 
