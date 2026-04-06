@@ -1,25 +1,26 @@
 import mill._
-import mill.scalalib.scalafmt.ScalafmtModule
-import mill.scalalib.TestModule.ScalaTest
 import mill.scalalib._
+import mill.scalalib.TestModule.ScalaTest
 
-object bergamot extends ScalaModule with ScalafmtModule {
-  override def scalaVersion        = "2.13.16"
-  override def scalacOptions       = Seq(
+object bergamot extends ScalaModule {
+  def scalaVersion = "2.13.18"
+  def chiselVersion = "7.7.0"
+  override def scalacOptions = Seq(
     "-language:reflectiveCalls",
     "-deprecation",
     "-feature",
-    "-Xcheckinit"
+    "-Xcheckinit",
+    "-Ymacro-annotations"
   )
-  override def ivyDeps             = Agg(
-    ivy"org.chipsalliance::chisel:7.10.0"
+  override def mvnDeps = Seq(
+    mvn"org.chipsalliance::chisel:$chiselVersion"
   )
-  override def scalacPluginIvyDeps = Agg(
-    ivy"org.chipsalliance:::chisel-plugin:7.10.0"
+  override def scalacPluginMvnDeps = Seq(
+    mvn"org.chipsalliance:::chisel-plugin:$chiselVersion"
   )
-  object test extends ScalaTests with TestModule.ScalaTest with ScalafmtModule {
-    override def ivyDeps = bergamot.ivyDeps() ++ Agg(
-      ivy"org.scalatest::scalatest::3.2.19"
+  object test extends ScalaTests with TestModule.ScalaTest {
+    override def mvnDeps = Seq(
+      mvn"org.scalatest::scalatest::3.2.19"
     )
   }
 }
