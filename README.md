@@ -6,7 +6,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/LoveLonelyTime/Bergamot)
 ![GitHub Repo stars](https://img.shields.io/github/stars/LoveLonelyTime/Bergamot)
 
-
 ![Bergamot](doc/bergamot-social-card.png)
 
 An exquisite superscalar RV32GC processor.
@@ -28,6 +27,14 @@ And is trying to maintain simplicity as much as possible.
 **My documents site is deployed now!**
 
 Interesting? Check out our [Trip](https://lovelonelytime.github.io/Bergamot-doc/)!
+
+## Installation
+- **💡 Recommendation:** For the easiest setup, use our provided Dev Docker container (.devcontainer). If you prefer a local installation, please refer to the [Chisel Installation Guide](https://www.chisel-lang.org/docs/installation).
+
+## Usage
+
+- Generate synthesizable verilog: `make verilog`.
+- Generate simulation model: `make verilogsim`.
 
 ## Architecture
 

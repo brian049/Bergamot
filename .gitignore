@@ -353,3 +353,6 @@ hs_err_pid*
 # Verilator files
 obj_dir/
 *.dtb
+
+# Generated code
+./build/*

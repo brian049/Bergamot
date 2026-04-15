@@ -1,4 +1,4 @@
-package bergamot.export
+package bergamot.exporter
 
 import chisel3._
 
